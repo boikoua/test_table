@@ -1,0 +1,47 @@
+@import './../../styles/variables';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px;
+  background-color: $header-bg-color;
+
+  & a {
+    color: $header-text-color;
+    line-height: 22px;
+  }
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 600;
+  transition: all 0.3s;
+
+  & > span {
+    font-size: inherit;
+    text-transform: uppercase;
+    color: $brand-color;
+    font-weight: 900;
+  }
+
+  &:hover {
+    color: $brand-color;
+  }
+}
+
+.right {
+  display: flex;
+  gap: 66px;
+
+  & > a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
