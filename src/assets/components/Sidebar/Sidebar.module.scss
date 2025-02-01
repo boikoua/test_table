@@ -1,0 +1,29 @@
+@import './../../styles/variables';
+
+.sidebar {
+  padding: 30px 20px;
+  min-height: 100vh;
+  background-color: $aside-bg-color;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+  color: $aside-link-color;
+
+  &:hover {
+    color: $brand-color;
+  }
+}
+
+.active {
+  color: $brand-color;
+}

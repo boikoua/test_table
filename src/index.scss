@@ -1,3 +1,4 @@
+@import './assets/styles/variables';
 @import './assets/style.css';
 
 * {
@@ -7,6 +8,14 @@
   font-family: 'Montserrat', serif;
   font-size: 15px;
   font-weight: 400;
+  line-height: 22px;
+}
+
+h2,
+p,
+input,
+td {
+  color: $text-color;
 }
 
 ul {
