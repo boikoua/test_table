@@ -1,7 +1,30 @@
+import { useDispatch, useSelector } from 'react-redux';
 import ProductItem from '../ProductItem';
 import styles from './ProductList.module.scss';
+import { useEffect } from 'react';
+import { fetchItems } from '../../store/features/itemsSlice';
+import { AppDispatch, RootState } from '../../store/store';
 
 const ProductList = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { items, loading, error } = useSelector(
+    (state: RootState) => state.items
+  );
+
+  useEffect(() => {
+    dispatch(fetchItems());
+  }, [dispatch]);
+
+  console.log({
+    data: items,
+    loading: loading,
+    error: error,
+  });
+
+  const showItems = items.map((item) => (
+    <ProductItem key={item.Id} item={item} />
+  ));
+
   return (
     <section className={styles.products}>
       <h2 className={styles.title}>Product List</h2>
@@ -30,15 +53,7 @@ const ProductList = () => {
           </tr>
         </thead>
 
-        <tbody className={styles.tableBody}>
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-          <ProductItem />
-        </tbody>
+        <tbody className={styles.tableBody}>{showItems}</tbody>
 
         <tfoot className={styles.tableFooter}>
           <tr>

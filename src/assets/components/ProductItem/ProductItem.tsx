@@ -1,16 +1,35 @@
+import { Iitem } from '../../types/Iitem';
 import styles from './ProductItem.module.scss';
 
-const ProductItem = () => {
+type Props = {
+  item: Iitem;
+};
+
+const ProductItem: React.FC<Props> = ({ item }) => {
+  const { Image, Name, Category, ProductPrice, Country, Status } = item;
+
+  const countryArray = JSON.parse(Country);
+
+  const showCountry = countryArray
+    .map((country: string) => country + '\n')
+    .join(', ');
+
+  console.log(showCountry);
+
   return (
     <tr className={styles.product}>
       <td>
-        <span className={styles.cube}></span>
+        {Image ? (
+          <img className={styles.img} src={Image} alt={Name} />
+        ) : (
+          <span className={styles.cube}></span>
+        )}
       </td>
-      <td>EchoSound Wireless Earbuds</td>
-      <td>Audio Devices</td>
-      <td>$49.99</td>
-      <td>US</td>
-      <td>Pending Approval</td>
+      <td>{Name ? Name : '-'}</td>
+      <td>{Category ? Category : '-'}</td>
+      <td>${ProductPrice}</td>
+      <td>{Country ? showCountry : '-'}</td>
+      <td>{Status ? Status : '-'}</td>
       <td>
         <button className={styles.btn}>
           <span className="icon-pen"></span>
