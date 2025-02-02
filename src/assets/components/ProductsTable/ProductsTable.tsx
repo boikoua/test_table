@@ -3,10 +3,26 @@ import styles from './ProductsTable.module.scss';
 type Props = {
   items: React.ReactNode;
   limit: number;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onLimitChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  page: number;
+  onPageChange: (newPage: number) => void;
+  totalItems: number;
+  startIndex: number;
+  endIndex: number;
 };
 
-const ProductsTable: React.FC<Props> = ({ items, limit, onChange }) => {
+const ProductsTable: React.FC<Props> = ({
+  items,
+  limit,
+  onLimitChange,
+  page,
+  onPageChange,
+  totalItems,
+  startIndex,
+  endIndex,
+}) => {
+  const totalPages = Math.ceil(totalItems / limit);
+
   return (
     <table className={styles.table}>
       <thead className={styles.tableHeader}>
@@ -30,7 +46,7 @@ const ProductsTable: React.FC<Props> = ({ items, limit, onChange }) => {
               <div className={styles.left}>
                 <span>Items per page:</span>
                 <select
-                  onChange={onChange}
+                  onChange={onLimitChange}
                   value={limit}
                   className={styles.select}
                 >
@@ -41,18 +57,32 @@ const ProductsTable: React.FC<Props> = ({ items, limit, onChange }) => {
               </div>
 
               <div className={styles.right}>
-                <span>Showing 1-10 of 87 items</span>
+                <span>
+                  Showing {startIndex + 1}-{Math.min(endIndex, totalItems)} of{' '}
+                  {totalItems} items
+                </span>
 
                 <div className={styles.tablePages}>
-                  <button className={styles.leftPage}>
+                  <button
+                    className={styles.leftPage}
+                    onClick={() => onPageChange(page - 1)}
+                    disabled={page <= 1}
+                  >
                     <span className="icon-arrow"></span>
                   </button>
+
                   <input
                     className={styles.pageCount}
                     type="text"
-                    defaultValue={1}
+                    value={page}
+                    readOnly
                   />
-                  <button className={styles.rightPage}>
+
+                  <button
+                    className={styles.rightPage}
+                    onClick={() => onPageChange(page + 1)}
+                    disabled={page >= totalPages}
+                  >
                     <span className="icon-arrow"></span>
                   </button>
                 </div>

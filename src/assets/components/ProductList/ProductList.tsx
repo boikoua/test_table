@@ -17,6 +17,7 @@ const ProductList = () => {
   const [searchValue, setSearchValue] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     dispatch(fetchItems());
@@ -25,28 +26,42 @@ const ProductList = () => {
   useEffect(() => {
     const query = searchParams.get('query') || '';
     const limit = searchParams.get('limit');
+    const page = searchParams.get('page') || '1';
 
     setSearchValue(query);
     if (limit) setItemsPerPage(Number(limit));
+    setCurrentPage(Number(page));
   }, [searchParams]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchValue(value);
-    setSearchParams({ query: value, limit: String(itemsPerPage) });
+    setSearchParams({ query: value, limit: String(itemsPerPage), page: '1' });
   };
 
   const handleLimitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setItemsPerPage(Number(value));
-    setSearchParams({ query: searchValue, limit: value });
+    setSearchParams({ query: searchValue, limit: value, page: '1' });
   };
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    setSearchParams({
+      query: searchValue,
+      limit: String(itemsPerPage),
+      page: String(newPage),
+    });
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
   const showItems = items
     .filter((item) =>
       item.Name.toLowerCase().includes(searchValue.toLowerCase())
     )
-    .slice(0, itemsPerPage)
+    .slice(startIndex, endIndex)
     .map((item) => <ProductItem key={item.Id} item={item} />);
 
   return (
@@ -82,7 +97,12 @@ const ProductList = () => {
         <ProductsTable
           items={showItems}
           limit={itemsPerPage}
-          onChange={handleLimitChange}
+          onLimitChange={handleLimitChange}
+          page={currentPage}
+          onPageChange={handlePageChange}
+          totalItems={items.length}
+          startIndex={startIndex}
+          endIndex={endIndex}
         />
       )}
 

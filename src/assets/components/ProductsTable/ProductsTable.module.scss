@@ -73,7 +73,7 @@
   background-color: $table-btn-bg-color;
   transition: all 0.3s;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: $brand-color;
   }
 
