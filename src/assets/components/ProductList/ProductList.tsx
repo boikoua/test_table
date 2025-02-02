@@ -16,6 +16,7 @@ const ProductList = () => {
 
   const [searchValue, setSearchValue] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
+  const [itemsPerPage, setItemsPerPage] = useState<number>(10);
 
   useEffect(() => {
     dispatch(fetchItems());
@@ -23,19 +24,29 @@ const ProductList = () => {
 
   useEffect(() => {
     const query = searchParams.get('query') || '';
+    const limit = searchParams.get('limit');
+
     setSearchValue(query);
+    if (limit) setItemsPerPage(Number(limit));
   }, [searchParams]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchValue(value);
-    setSearchParams({ query: value });
+    setSearchParams({ query: value, limit: String(itemsPerPage) });
+  };
+
+  const handleLimitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    setItemsPerPage(Number(value));
+    setSearchParams({ query: searchValue, limit: value });
   };
 
   const showItems = items
     .filter((item) =>
       item.Name.toLowerCase().includes(searchValue.toLowerCase())
     )
+    .slice(0, itemsPerPage)
     .map((item) => <ProductItem key={item.Id} item={item} />);
 
   return (
@@ -67,7 +78,13 @@ const ProductList = () => {
         </h3>
       )}
 
-      {!loading && !error && <ProductsTable items={showItems} />}
+      {!loading && !error && (
+        <ProductsTable
+          items={showItems}
+          limit={itemsPerPage}
+          onChange={handleLimitChange}
+        />
+      )}
 
       <button className={styles.submit}>Submit</button>
     </section>

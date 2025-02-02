@@ -2,9 +2,11 @@ import styles from './ProductsTable.module.scss';
 
 type Props = {
   items: React.ReactNode;
+  limit: number;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
-const ProductsTable: React.FC<Props> = ({ items }) => {
+const ProductsTable: React.FC<Props> = ({ items, limit, onChange }) => {
   return (
     <table className={styles.table}>
       <thead className={styles.tableHeader}>
@@ -27,10 +29,14 @@ const ProductsTable: React.FC<Props> = ({ items }) => {
             <div className={styles.tableWrapper}>
               <div className={styles.left}>
                 <span>Items per page:</span>
-                <select defaultValue="10" className={styles.select}>
-                  <option value="5">5</option>
+                <select
+                  onChange={onChange}
+                  value={limit}
+                  className={styles.select}
+                >
+                  <option value="4">4</option>
+                  <option value="8">8</option>
                   <option value="10">10</option>
-                  <option value="all">All</option>
                 </select>
               </div>
 
