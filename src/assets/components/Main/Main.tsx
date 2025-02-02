@@ -1,12 +1,16 @@
-import ProductList from '../ProductList';
+import React from 'react';
 import Sidebar from '../Sidebar';
 import styles from './Main.module.scss';
 
-const Main = () => {
+type Props = {
+  content: React.ReactNode;
+};
+
+const Main: React.FC<Props> = ({ content }) => {
   return (
     <main className={styles.main}>
       <Sidebar />
-      <ProductList />
+      {content}
     </main>
   );
 };

@@ -1,21 +1,26 @@
+import { NavLink } from 'react-router-dom';
 import styles from './Sidebar.module.scss';
+import cn from 'classnames';
 
 const Sidebar = () => {
+  const handleIsActive = ({ isActive }: { isActive: boolean }) =>
+    cn(styles.link, { [styles.active]: isActive });
+
   return (
     <aside className={styles.sidebar}>
       <nav className={styles.nav}>
         <ul className={styles.items}>
           <li className={styles.item}>
-            <a href="#" className={`${styles.link} ${styles.active}`}>
+            <NavLink to="/" className={handleIsActive}>
               <span>Product List</span>
               <span className="icon-arrow"></span>
-            </a>
+            </NavLink>
           </li>
           <li className={styles.item}>
-            <a href="#" className={styles.link}>
+            <NavLink to="/account" className={handleIsActive}>
               <span>My Account</span>
               <span className="icon-arrow"></span>
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>
