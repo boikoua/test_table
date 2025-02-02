@@ -14,8 +14,6 @@ const ProductItem: React.FC<Props> = ({ item }) => {
     .map((country: string) => country + '\n')
     .join(', ');
 
-  console.log(showCountry);
-
   return (
     <tr className={styles.product}>
       <td>

@@ -56,94 +56,10 @@
   }
 }
 
-.table {
-  margin-bottom: 54px;
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid $table-border-color;
-  text-align: left;
-
-  & th,
-  & td {
-    padding: 20px;
-    border: 1px solid $table-border-color;
-  }
-}
-
-.tableHeader {
-  & th {
-    padding: 20px 30px;
-    font-size: 13px;
-    font-weight: 500;
-    background-color: $table-header-bg-color;
-    color: $table-header-text-color;
-  }
-}
-
-.tableFooter {
-  & > tr {
-    display: table-row;
-
-    & > td {
-      padding-block: 10px;
-    }
-  }
-}
-
-.tableWrapper {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 50px;
-}
-
-.left,
-.right {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.select,
-.pageCount {
-  padding: 8px 15px;
-  border: 1px solid $input-border-color;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.tablePages {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.leftPage,
-.rightPage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  background-color: $table-btn-bg-color;
-  transition: all 0.3s;
-
-  &:hover {
-    background-color: $brand-color;
-  }
-
-  & > span {
-    font-size: 18px;
-  }
-}
-
-.leftPage {
-  transform: rotate(-180deg);
-}
-
-.pageCount {
-  width: 80px;
+.error {
+  margin-bottom: 30px;
+  font-size: 32px;
+  color: $error-text-color;
 }
 
 .submit {

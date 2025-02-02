@@ -1,0 +1,10 @@
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > img {
+    height: 500px;
+    width: 500px;
+  }
+}
