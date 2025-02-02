@@ -1,5 +1,5 @@
-import { Iitem } from '../../types/Iitem';
 import styles from './ProductItem.module.scss';
+import { Iitem } from '../../types/Iitem';
 
 type Props = {
   item: Iitem;
@@ -10,9 +10,7 @@ const ProductItem: React.FC<Props> = ({ item }) => {
 
   const countryArray = JSON.parse(Country);
 
-  const showCountry = countryArray
-    .map((country: string) => country + '\n')
-    .join(', ');
+  const showCountry = countryArray.join(', ');
 
   return (
     <tr className={styles.product}>

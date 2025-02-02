@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom';
 import styles from './Sidebar.module.scss';
 import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   const handleIsActive = ({ isActive }: { isActive: boolean }) =>

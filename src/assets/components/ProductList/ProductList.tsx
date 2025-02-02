@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-import ProductItem from '../ProductItem';
 import styles from './ProductList.module.scss';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems } from '../../store/features/itemsSlice';
 import { AppDispatch, RootState } from '../../store/store';
+import { useSearchParams } from 'react-router-dom';
+import ProductItem from '../ProductItem';
 import Loader from '../Loader';
 import ProductsTable from '../ProductsTable';
-import { useSearchParams } from 'react-router-dom';
 
 const ProductList = () => {
   const dispatch = useDispatch<AppDispatch>();

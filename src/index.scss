@@ -1,5 +1,5 @@
-@import './assets/styles/variables';
 @import './assets/style.css';
+@import './assets/styles/variables';
 
 * {
   padding: 0;
@@ -32,7 +32,8 @@ a {
 }
 
 button,
-input {
+input,
+select {
   outline: none;
   border: none;
 }
